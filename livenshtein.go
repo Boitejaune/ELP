@@ -23,7 +23,7 @@ func livenshtein(message1 string, message2 string) int {
 
 	for i := 0; i < lignes; i++ { //on calcule la matrice de coùt
 		for j := 0; j < colonnes; j++ {
-			if strings.EqualFold(string(message1[i]), string(message2[j])) {
+			if strings.EqualFold(string(message1[i]), string(message2[j])) { //on ignore les lettres capitales.
 				tableaucout[i][j] = 0
 			} else {
 				tableaucout[i][j] = 1
