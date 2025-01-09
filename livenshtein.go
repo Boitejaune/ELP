@@ -3,6 +3,7 @@ package main
 import "strings"
 
 func livenshtein(message1 string, message2 string) int {
+	defer wg.Done()
 	lignes := len(message1)
 	colonnes := len(message2)
 	var tableau = make([][]int, lignes+1)
