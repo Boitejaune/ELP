@@ -40,16 +40,22 @@ func connection( c net.Conn){
     textclient := bufio.NewReader(c) //Buffered reader : lit et met en mémoire texte en entrée
 
     for {
-        lignclient, err := connReader.ReadString('\n') //Lit une ligne de texte du buffer (lit jusqu'à séparation '\n')
+        lignclient, err := textclient.ReadString('\n') //Lit une ligne de texte du buffer (lit jusqu'à séparation '\n')
         if err != nil {
             log.Println(err)
             os.Exit(1)
         }
         request := strings.TrimSpace(lignclient) //Renvoie lignclient sans les espaces blancs de début et de fin + \n ... 
-    
+
         if request == "STOP" {  //Arret de la connection par le client
             break
         }
+        fmt.Print("-> ", string(request))
+
+        c.Write([]byte(lignclient))
+
+        // Lievenstein
+        //go main(request)
     }
 
     c.Close()

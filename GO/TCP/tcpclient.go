@@ -10,7 +10,7 @@ import (
 
 // Connection au serveur
 func main() {
-    conn, err := net.Dial("tcp", port) 
+    conn, err := net.Dial("tcp", “127.0.0.1:80”) 
     if err != nil {
         log.Fatal(err) // comment?????
         os.Exit()
@@ -34,7 +34,7 @@ func main() {
             os.Exit(1)
         }
 
-        fmt.Print("->: " + message) 
+        fmt.Print("->: " + serveur) 
 
 
         if strings.TrimSpace(string(text)) == "STOP" {
