@@ -1,8 +1,13 @@
-package main
+package livenshtein
 
-import "strings"
+import(
+	"strings"
+	"sync"
+)
 
-func livenshtein(message1 string, message2 string) int {
+var wg sync.WaitGroup
+
+func Livenshtein(message1 string, message2 string, res int) int {
 	defer wg.Done()
 	lignes := len(message1)
 	colonnes := len(message2)
@@ -37,6 +42,6 @@ func livenshtein(message1 string, message2 string) int {
 			tableau[i][j] = min(tableau[i-1][j]+1, tableau[i][j-1]+1, tableau[i-1][j-1]+tableaucout[i-1][j-1])
 		}
 	}
-	res := tableau[lignes][colonnes]
+	res = tableau[lignes][colonnes] + res
 	return res
 }

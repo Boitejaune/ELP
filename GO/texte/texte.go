@@ -1,11 +1,13 @@
-package main
+package texte
 
 import (
-	"fmt"
 	"strings"
+	"sync"
 )
 
-func trans(text string) [4]string {
+var wg sync.WaitGroup
+
+func Trans(text string) [4]string {
 	defer wg.Done()
 	var tab[4] string
 	var mot string
@@ -25,11 +27,4 @@ func trans(text string) [4]string {
 	}
 	tab[3]=mot
 	return tab
-}
-
-func main(){
-	a:="Je mange des tomates"
-	tab:=trans(a)
-	fmt.Println(a)
-	fmt.Println(tab)
 }
