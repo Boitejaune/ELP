@@ -5,9 +5,7 @@ import(
 	"sync"
 )
 
-var wg sync.WaitGroup
-
-func Livenshtein(message1 string, message2 string, res int) int {
+func Livenshtein(wg *sync.WaitGroup,message1 string, message2 string) int {
 	defer wg.Done()
 	lignes := len(message1)
 	colonnes := len(message2)
@@ -42,6 +40,6 @@ func Livenshtein(message1 string, message2 string, res int) int {
 			tableau[i][j] = min(tableau[i-1][j]+1, tableau[i][j-1]+1, tableau[i-1][j-1]+tableaucout[i-1][j-1])
 		}
 	}
-	res = tableau[lignes][colonnes] + res
+	res := tableau[lignes][colonnes]
 	return res
 }
