@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"main/livenshtein"
 	"main/requests_babel"
-	"main/texte"
 	"sync"
 	"time"
 	"strings"
@@ -18,8 +17,8 @@ func main() {
 	a:=requests_babel.Get_book(0,1,1,1)
 	b:="Je mange des tomates"
 	
-	var tab[4] string
-	var tab2[4] string
+	var tab[] string
+	var tab2[] string
 
 	wg := &sync.WaitGroup{}
 	tab = strings.Fields(a)
