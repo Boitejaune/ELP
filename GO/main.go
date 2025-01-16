@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"main/livenshtein"
+	"main/requests_babel"
 	"main/texte"
 	"sync"
 	"time"
@@ -12,9 +13,10 @@ var wg sync.WaitGroup // instanciation de notre structure WaitGroup
 
 func main() {
 	debut := time.Now()
-	a:="Je mange des tomates"
-	b:="Je mang des tomtes"
 
+	a:=requests_babel.Get_book(0,1,1,1)
+	b:="Je mange des tomates"
+	
 	var tab[4] string
 	var tab2[4] string
 

@@ -1,4 +1,4 @@
-package main
+package requests_babel
 
 import (
 	"fmt"
@@ -8,7 +8,7 @@ import (
 	"strconv"
 )
 
-func get_book(hexagon int, wall int, shelf int, volume int) string {
+func Get_book(hexagon int, wall int, shelf int, volume int) string {
 	requestURL := "https://libraryofbabel.info/download.cgi" // url du site pour télécharger les livres
 	req,err := http.PostForm(requestURL,url.Values{"hex":{strconv.Itoa(hexagon)},"wall":{strconv.Itoa(wall)},"shelf":{strconv.Itoa(shelf)},"volume":{"0"+strconv.Itoa(volume)},"page":{"1"},"title":{"startofthetext"}})  // formatage de la demande POST à l'URL posée juste au dessus avec l'adresse du livre voulu
 	if err != nil{
