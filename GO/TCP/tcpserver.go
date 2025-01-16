@@ -1,11 +1,12 @@
 package main
 
 import (
-    "bufio"
-    "fmt"
-    "net"
-    "os"
-    "strings"
+	"bufio"
+	"fmt"
+	"log"
+	"net"
+	"os"
+	"strings"
 )
 
 const (
@@ -28,6 +29,7 @@ func main() {
         if err != nil {
             log.Fatal(err)
         }
+        fmt.Println("connection accepted: ",c.RemoteAddr().String())
         go connection(c)
     }
 }
@@ -61,16 +63,3 @@ func connection( c net.Conn){
     c.Close()
 }
 
-
-/*
-// Accept a new connection on that port
-conn, errconn := ln.Accept()
-// Close the connection of a client
-conn.Close()
-
-// Write content on the connection
-io.WriteString(conn, fmt.Sprintf("Coucou %d\n", i))
-
-
-c.RemoteAddr().String() //address client
-*/

@@ -1,6 +1,6 @@
 package livenshtein
 
-import(
+import (
 	"strings"
 	"sync"
 )

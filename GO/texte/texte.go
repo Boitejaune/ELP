@@ -7,7 +7,6 @@ import (
 
 
 func Trans(wg *sync.WaitGroup,text string) [4]string  {
-	defer wg.Done()
 	var tab[4] string
 	var mot string
 	j:=0

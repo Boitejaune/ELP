@@ -1,21 +1,22 @@
-packkge main
+package main
 
 import (
-    "bufio"
-    "fmt"
-    "net"
-    "os"
-    "strings"
+	"bufio"
+	"fmt"
+	"log"
+	"net"
+	"os"
+	"strings"
 )
 
 // Connection au serveur
 func main() {
-    conn, err := net.Dial("tcp", “127.0.0.1:80”) 
+    conn, err := net.Dial("tcp", "127.0.0.1:8080") 
     if err != nil {
         log.Fatal(err) // comment?????
-        os.Exit()
+        os.Exit(1)
     }
-    defer l.Close() //????????
+    defer conn.Close() //????????
 
     entree:=bufio.NewReader(os.Stdin)
     for {
@@ -26,9 +27,9 @@ func main() {
             os.Exit(1)
         }
 
-        fmt.Fprintf(c, text+"\n") // Fprintf : imprime text dans c
+        fmt.Fprintf(conn, text+"\n") // Fprintf : imprime text dans c
 
-        serveur,err2:= bufio.NewReader(c).ReadString('\n') //Lit réponse serveur
+        serveur,err2:= bufio.NewReader(conn).ReadString('\n') //Lit réponse serveur
         if err2 != nil {
             log.Println(err2)
             os.Exit(1)
@@ -43,7 +44,7 @@ func main() {
         }
     }
 
-    c.Close()
+    conn.Close()
 }
 
 

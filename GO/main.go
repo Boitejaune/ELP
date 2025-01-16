@@ -1,11 +1,11 @@
 package main
 
 import (
-    "fmt"
-	"main/texte"
-	"time"
+	"fmt"
 	"main/livenshtein"
+	"main/texte"
 	"sync"
+	"time"
 )
 
 var wg sync.WaitGroup // instanciation de notre structure WaitGroup
@@ -19,19 +19,12 @@ func main() {
 	var tab2[4] string
 
 	wg := &sync.WaitGroup{}
-
-	wg.Add(1)
-	go func(){
-		tab = texte.Trans(wg,a)
-		}()
+	
+	tab = texte.Trans(wg,a)
 	fmt.Println(a)
 	fmt.Println(tab)
 	var mot int = len(tab) // nombre de mots sur une page
-
-	wg.Add(1)
-	go func(){
-		tab2 = texte.Trans(wg,b)
-		}()
+	tab2 = texte.Trans(wg,b)
 	fmt.Println(b)
 	fmt.Println(tab2)
 
@@ -41,8 +34,8 @@ func main() {
 		go func(){
 			res += livenshtein.Livenshtein(wg,tab[i],tab2[i])}()
 	}
-	fmt.Println(res)
 	wg.Wait()
+	fmt.Println(res)
     fin := time.Now()
     fmt.Println(fin.Sub(debut))
 }
