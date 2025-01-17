@@ -2,11 +2,9 @@ package livenshtein
 
 import (
 	"strings"
-	"sync"
 )
 
-func Livenshtein(wg *sync.WaitGroup,message1 string, message2 string) int {
-	defer wg.Done()
+func Livenshtein(message1 string, message2 string) int {
 	lignes := len(message1)
 	colonnes := len(message2)
 	var tableau = make([][]int, lignes+1)
