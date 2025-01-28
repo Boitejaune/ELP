@@ -72,6 +72,13 @@ draw instructions =
 -- Instructions pour dessiner un carré
 squareInstruction : Instruction
 squareInstruction =
+    Direction Repeat 4 (                     -- Répète 4 fois les instructions suivantes :
+        Direction Forward 100 (              -- Avance de 100
+            Direction Right 90 End           -- Tourne à droite de 90°
+        )
+    )
+
+{-
     Direction Forward 100 (                -- Avance de 100
         Direction Right 90 (               -- Tourne à droite de 90°
             Direction Forward 100 (        -- Avance de 100
@@ -85,7 +92,7 @@ squareInstruction =
             )
         )
     )
-
+-}
 -- Dessiner les instructions avec la fonction `draw`
 main : Svg msg
 main =
