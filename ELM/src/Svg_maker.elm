@@ -36,11 +36,11 @@ drawInstruction instruction position acc =
 
         Direction Right angle next ->
             -- Changer l'angle pour tourner à droite
-            drawInstruction next { position | angle = position.angle - toFloat angle } acc
+            drawInstruction next { position | angle = position.angle + toFloat angle } acc
 
         Direction Left angle next ->
             -- Changer l'angle pour tourner à gauche
-            drawInstruction next { position | angle = position.angle + toFloat angle } acc
+            drawInstruction next { position | angle = position.angle - toFloat angle } acc
 
         Direction Repeat count subInstructions ->
             let
