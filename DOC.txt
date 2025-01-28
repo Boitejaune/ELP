@@ -1,2 +1,0 @@
-site ELM : https://guide.elm-lang.org/
-Client-Server TCP : https://medium.com/@viktordev/socket-programming-in-go-write-a-simple-tcp-client-server-c9609edf3671
