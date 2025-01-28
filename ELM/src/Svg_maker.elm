@@ -52,7 +52,7 @@ drawInstruction instruction position acc =
                         (acc, position)
                         (List.range 1 count)
             in
-            drawInstruction subInstructions (snd repeatResult) (fst repeatResult)
+            drawInstruction subInstructions (Tuple.second repeatResult) (Tuple.first repeatResult)
 
         End ->
             (acc, position)
@@ -69,4 +69,24 @@ draw instructions =
         [ width "500", height "500", viewBox "-250 -250 500 500", fill "none" ]
         (List.reverse svgElements)
 
-feur = draw Direction Forward 100
+-- Instructions pour dessiner un carré
+squareInstruction : Instruction
+squareInstruction =
+    Direction Forward 100 (                -- Avance de 100
+        Direction Right 90 (               -- Tourne à droite de 90°
+            Direction Forward 100 (        -- Avance de 100
+                Direction Right 90 (       -- Tourne à droite de 90°
+                    Direction Forward 100 ( -- Avance de 100
+                        Direction Right 90 ( -- Tourne à droite de 90°
+                            Direction Forward 100 End -- Avance de 100 et termine
+                        )
+                    )
+                )
+            )
+        )
+    )
+
+-- Dessiner les instructions avec la fonction `draw`
+main : Svg msg
+main =
+    draw squareInstruction
