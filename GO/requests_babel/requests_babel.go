@@ -7,11 +7,10 @@ import (
 	"net/url"
 	"os"
 	"strconv"
-	"sync"
 )
 
-func Get_book(wg *sync.WaitGroup, hexagon int, wall int, shelf int, volume int) string {
-	defer wg.Done()
+func Get_book(hexagon int, wall int, shelf int, volume int) string {
+	// defer wg.Done()
 	requestURL := "https://libraryofbabel.info/download.cgi" // url du site pour télécharger les livres
 	var req *http.Response
 	var err error
@@ -26,6 +25,9 @@ func Get_book(wg *sync.WaitGroup, hexagon int, wall int, shelf int, volume int) 
 	}
 	// fmt.Printf("Received a book!\n")
 	stringres,_ := io.ReadAll(req.Body) //lecture du corps du texte
+	if len(stringres) < 30 {
+		return("1")
+	}
 	final := string(stringres)
 	return(final[16:len(final)-29]) //pour enlever le titre du texte au début et l'adresse du livre à la fin avant de renvoyer le contenu du livre
 }
