@@ -69,6 +69,7 @@ draw instructions =
         [ width "500", height "500", viewBox "-250 -250 500 500", fill "none" ]
         (List.reverse svgElements)
 
+{-
 -- Instructions pour dessiner un carré
 squareInstruction : Instruction
 squareInstruction =
@@ -97,3 +98,4 @@ squareInstruction =
 main : Svg msg
 main =
     draw squareInstruction
+-}
