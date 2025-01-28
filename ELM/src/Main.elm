@@ -7,14 +7,10 @@ import Html.Events exposing (onInput)
 
 -- MAIN
 
-
 main =
   Browser.sandbox { init = init, update = update, view = view }
 
-
-
 -- MODEL
-
 
 type alias Model =
   { content : String
@@ -25,10 +21,7 @@ init : Model
 init =
   { content = "" }
 
-
-
 -- UPDATE
-
 
 type Msg
   = Change String
@@ -40,13 +33,10 @@ update msg model =
     Change newContent ->
       { model | content = newContent }
 
-
-
 -- VIEW
-
 
 view : Model -> Html Msg
 view model =
   div []
-    [ input [ placeholder "Ecrire votre dictée", value model.content, onInput Change ] []
+    [ input [ placeholder "example: [Repeat 360 [Forward 1, Left 1]]", value model.content, onInput Change ] []
     ]
