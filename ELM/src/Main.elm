@@ -43,8 +43,8 @@ update msg model =
             let
                 parsedInstruction =
                     case run read newContent of
-                        Ok instruction ->
-                            Just (draw [instruction])
+                        Ok instructions ->
+                            Just (draw instructions)  -- instructions est déjà une liste, on la passe directement à draw
 
                         Err _ ->
                             Nothing
@@ -57,7 +57,7 @@ update msg model =
 view : Model msg -> Html Msg
 view model =
     div [Html.Attributes.class "page"]
-        [ div [Html.Attributes.class "field"][text "Notez votre code TcTurtle içi:"]
+        [ div [Html.Attributes.class "field"][text "Notez votre code TcTurtle ici:"]
         ,
         div [Html.Attributes.class "field"]
             [input
