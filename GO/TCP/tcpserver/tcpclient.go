@@ -1,4 +1,4 @@
-package main
+package tcpclient
 
 import (
 	"bufio"
@@ -10,13 +10,13 @@ import (
 )
 
 // Connection au serveur
-func main() {
+func connectclient() {
     conn, err := net.Dial("tcp", "127.0.0.1:8080") 
     if err != nil {
-        log.Fatal(err) // comment?????
+        log.Fatal(err)
         os.Exit(1)
     }
-    defer conn.Close() //????????
+    defer conn.Close()
 
     entree:=bufio.NewReader(os.Stdin)
     for {

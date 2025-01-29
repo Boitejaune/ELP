@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"main/livenshtein"
 	"main/requests_babel"
+	"math/rand/v2"
 	"strings"
 	"sync"
 	"time"
@@ -16,13 +17,14 @@ func main() {
 	b:="tomates"
 	
 	var tab2[] string
-	// wg := &sync.WaitGroup{}
 	wg1 := &sync.WaitGroup{}
 
 	// nombre de mots sur une page
 	tab2 = strings.Fields(b)
 	var recherche int = len(tab2)
-
+	var hex int = rand.IntN(100) // choix d'une salle au hasard dans la librairie de babel
+	
+	//pour des raisons 
 	fmt.Println(b)
 	fmt.Println(tab2)
 	for w:=1 ; w<=4 ; w++{
@@ -31,7 +33,7 @@ func main() {
 				wg1.Add(1)
 				go func(s int,v int,w int){
 					defer wg1.Done()
-					a := requests_babel.Get_book(3,w,s,v)
+					a := requests_babel.Get_book(hex,w,s,v)
 					if a == "1" {
 						fmt.Println("error")
 					}else
