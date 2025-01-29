@@ -25,7 +25,7 @@ func Get_book(hexagon int, wall int, shelf int, volume int) string {
 	}
 	// fmt.Printf("Received a book!\n")
 	stringres,_ := io.ReadAll(req.Body) //lecture du corps du texte
-	if len(stringres) < 30 {
+	if len(stringres) < 300 {
 		return("1")
 	}
 	final := string(stringres)
