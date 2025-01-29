@@ -6,7 +6,7 @@ import Html.Attributes exposing (placeholder, value)
 import Html.Events exposing (onInput)
 import Svg exposing (Svg)
 import Svg_maker exposing (draw)
-import Read exposing (read, Instruction)
+import Read exposing (read)
 import Parser exposing (run)
 
 
@@ -44,7 +44,7 @@ update msg model =
                 parsedInstruction =
                     case run read newContent of
                         Ok instruction ->
-                            Just (draw instruction)
+                            Just (draw [instruction])
 
                         Err _ ->
                             Nothing
