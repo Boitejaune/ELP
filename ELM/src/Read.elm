@@ -2,58 +2,56 @@ module Read exposing (..)
 import Parser exposing(..)
 
 
-type Commande = Forward | Right | Left | Repeat
-type Instruction = Direction Commande Int (Instruction ) | End
+type Commande = Forward Int | Right Int| Left Int | Repeat Int (List Commande)
 
-keyword : Parser Commande
-keyword =
-    oneOf
-        [  succeed Forward |. symbol "Forward"
-        , succeed Right |. symbol "Right"
-        , succeed Left |. symbol "Left"
-        , succeed Repeat |. symbol "Repeat"
-        ]
 
-read: Parser Instruction
-read = 
-    succeed Direction
-        |.symbol "["
-        |. spaces
-        |= keyword
+comright: Parser Commande
+comright=succeed Right 
+        |. symbol "Right"
         |. spaces
         |= int
         |. spaces
-        |= oneOf[lazy (\_ -> read),succeed End]
-        |. spaces
-        |.symbol "]"
-    
-example : String -> Result (List DeadEnd) Instruction
-example input =
-    Parser.run read input
+        
 
 
-{-
-type Boolean
-  = MyTrue
-  | MyFalse
-  | MyOr Boolean Boolean
+comforward: Parser Commande
+comforward=succeed Forward 
+        |. symbol "Forward"
+        |. spaces
+        |= int
+        |. spaces
+        
 
-boolean : Parser Boolean
-boolean =
-  oneOf
-    [ succeed MyTrue
-        |. keyword "true"
-    , succeed MyFalse
-        |. keyword "false"
-    , succeed MyOr
-        |. symbol "("
+
+comleft: Parser Commande
+comleft=succeed Left 
+        |. symbol "Left"
         |. spaces
-        |= lazy (\_ -> boolean)
+        |= int
         |. spaces
-        |. symbol "||"
-        |. spaces
-        |= lazy (\_ -> boolean)
-        |. spaces
-        |. symbol ")"
-    ]
--}
+        
+
+repeat: Parser Commande
+repeat=succeed Repeat 
+    |. symbol "Repeat"
+    |. spaces
+    |= int
+    |. spaces
+    |=lazy(\_->listinstruc)
+        
+
+listinstruc: Parser (List Commande)
+listinstruc=sequence 
+        { start = "["
+        , separator = ","
+        , end = "]"
+        , spaces = spaces
+        , item = read
+        , trailing = Optional
+        }
+
+
+
+
+read: Parser Commande
+read = oneOf[comforward,comleft,comright,repeat]
