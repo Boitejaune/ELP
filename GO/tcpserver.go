@@ -1,9 +1,10 @@
-package tcpserver
+package main
 
 import (
 	"bufio"
 	"fmt"
 	"log"
+	"main/second"
 	"net"
 	"os"
 	"strings"
@@ -52,9 +53,10 @@ func connection( c net.Conn){
         if request == "STOP" {  //Arret de la connection par le client
             break
         }
+        request = second.Requetes(request)
         fmt.Print("-> ", string(request))
 
-        c.Write([]byte(lignclient))
+        c.Write([]byte(request))
 
         // Lievenstein
         //go main(request)
