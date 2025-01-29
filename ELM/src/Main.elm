@@ -1,7 +1,7 @@
 module Main exposing (main, init, update, view)
 
 import Browser
-import Html exposing (Html, div, input, text)
+import Html exposing (Html, div, input, text, p)
 import Html.Attributes exposing (placeholder, value)
 import Html.Events exposing (onInput)
 import Svg exposing (Svg)
@@ -56,14 +56,20 @@ update msg model =
 
 view : Model msg -> Html Msg
 view model =
-    div []
-        [ input
+    div [Html.Attributes.class "page"]
+        [ div [Html.Attributes.class "field"][text "Notez votre code TcTurtle içi:"]
+        ,
+        div [Html.Attributes.class "field"]
+            [input
             [ placeholder "example: [Repeat 4 [Forward 100, Right 90]]"
             , value model.content
             , onInput Change
+            , Html.Attributes.class "field__input"
             ]
             []
-        , case model.svgOutput of
+            ]
+        , div []
+            [case model.svgOutput of
             Just svg -> Html.map (\_ -> Change "") svg -- Transforme `Svg msg` en `Html Msg`
-            Nothing -> text "Invalid input or no drawing yet."
+            Nothing -> p [Html.Attributes.class "error"] [text "Invalid input or no drawing yet."]]
         ]
