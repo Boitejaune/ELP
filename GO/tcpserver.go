@@ -8,6 +8,7 @@ import (
 	"net"
 	"os"
 	"strings"
+	"sync"
 )
 
 const (
@@ -53,10 +54,16 @@ func connection( c net.Conn){
         if request == "STOP" {  //Arret de la connection par le client
             break
         }
-        request = second.Requetes(request)
-        fmt.Print("-> ", string(request))
+        wg := &sync.WaitGroup{}
+        wg.Add(1)
+        go func(){
+            request = second.Requetes(request)
+            wg.Done()
+        }()
+        wg.Wait()
+        fmt.Print("-> ", request,"\n")
 
-        c.Write([]byte(request))
+        c.Write([]byte(request + "\n"))
 
         // Lievenstein
         //go main(request)

@@ -27,7 +27,7 @@ func main() {
             os.Exit(1)
         }
 
-        fmt.Fprintf(conn, text+"\n") // Fprintf : imprime text dans c
+        fmt.Fprintf(conn, text) // Fprintf : imprime text dans c
 
         serveur,err2:= bufio.NewReader(conn).ReadString('\n') //Lit réponse serveur
         if err2 != nil {
@@ -39,8 +39,8 @@ func main() {
 
 
         if strings.TrimSpace(string(text)) == "STOP" {
-                fmt.Println("TCP client exiting...")
-                return
+            fmt.Println("TCP client exiting...")
+            return
         }
     }
 

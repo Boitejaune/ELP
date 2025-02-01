@@ -10,7 +10,6 @@ import (
 )
 
 func Get_book(hexagon int, wall int, shelf int, volume int) string {
-	// defer wg.Done()
 	requestURL := "https://libraryofbabel.info/download.cgi" // url du site pour télécharger les livres
 	var req *http.Response
 	var err error
