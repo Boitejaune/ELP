@@ -16,7 +16,7 @@ type Container struct {
 func main() {
 	debut := time.Now()
 	wg := &sync.WaitGroup{}
-	for i:=2; i<=100; i++{
+	for i:=13; i<=13; i++{
 		dir := fmt.Sprintf("/mnt/d/dossiers/insa/dataset ELP/hex%d",i)
 		fmt.Println(dir)
 		file,_ := os.Create(dir)
