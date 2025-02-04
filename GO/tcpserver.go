@@ -26,13 +26,13 @@ func main() {
     }
     defer l.Close()
 
-    for {
+    for {      //listen connection
         c, err := l.Accept() // Accept a new connection on that port
         if err != nil {
             log.Fatal(err)
         }
         fmt.Println("connection accepted: ",c.RemoteAddr().String())
-        go connection(c)
+        go connection(c)       //handle connection
     }
 }
 
@@ -65,8 +65,7 @@ func connection( c net.Conn){
 
         c.Write([]byte(request + "\n"))
 
-        // Lievenstein
-        //go main(request)
+        
     }
 
     c.Close()
