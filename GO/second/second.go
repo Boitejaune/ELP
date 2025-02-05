@@ -34,16 +34,13 @@ func Requetes(requete string) string {
 
 	for (hex<31 && !breaking) {
 		//récupération du fichier texte entier de la salle
-		tmps := time.Now()
 		dir := fmt.Sprintf("/mnt/d/dossiers/insa/dataset ELP/hex%d",hex)
 		f,_ := os.ReadFile(dir)
-		fmt.Println(time.Since(tmps))
 		w = 1
 		for (w<=4 && !breaking) {
 			s = 1
 			for (s<=5 && !breaking){
 				v = 1
-				tmps := time.Now()
 				for (v<=32 && !breaking){
 					wg1.Add(1)
 
@@ -103,7 +100,6 @@ func Requetes(requete string) string {
 					v+=1
 				}
 				wg1.Wait()
-				fmt.Println("go functions: " + time.Since(tmps).String())
 				if min == 0{
 					breaking = true
 				}
